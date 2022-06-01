@@ -1,0 +1,13 @@
+.movieContainer {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.movieImg {
+  margin-right: 30px;
+}
+
+img {
+  width: 300px;
+}

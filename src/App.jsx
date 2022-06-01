@@ -1,15 +1,17 @@
 import { Route, Switch } from 'react-router-dom';
 
-import Navigation from './Navigation/Navigation';
+import Navigation from './components/Navigation/Navigation';
 
-import HomePage from '../pages/HomePage';
-import MoviesPage from '../pages/MoviesPage';
+import HomePage from './pages/HomePage';
+import MoviesPage from './pages/MoviesPage';
+import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage';
+import Container from './components/Container/Container';
+
 // import NotFoundView from '../pages/NotFoundView';
-import MovieDetailsPage from '../pages/MovieDetailsPage';
 
 export default function App() {
   return (
-    <>
+    <Container>
       <Navigation />
 
       <Switch>
@@ -27,6 +29,6 @@ export default function App() {
           <NotFoundView />
         </Route> */}
       </Switch>
-    </>
+    </Container>
   );
 }
