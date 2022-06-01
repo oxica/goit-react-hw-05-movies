@@ -18,3 +18,15 @@ export function fetchMovieById(id) {
     `${BASE_URL}/movie/${id}?api_key=${KEY}&language=en-US`
   );
 }
+
+export function fetchMovieCast(id) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/movie/${id}/credits?api_key=${KEY}&language=en-US`
+  );
+}
+
+export function fetchMovieReviews(id) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/movie/${id}/reviews?api_key=${KEY}&language=en-US`
+  );
+}
