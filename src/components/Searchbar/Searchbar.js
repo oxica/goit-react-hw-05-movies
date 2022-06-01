@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import s from './Searchbar.module.css';
 import { toast } from 'react-toastify';
 
-export default function Searchbar({ onSubmit }) {
+export default function Searchbar({ onClick }) {
   const [query, setQuery] = useState('');
 
   const handleInputChange = e => {
@@ -18,12 +18,12 @@ export default function Searchbar({ onSubmit }) {
       return;
     }
 
-    onSubmit(query);
+    onClick(query);
   };
 
   return (
     <header className={s.searchbar}>
-      <form className={s.searchForm} onSubmit={handleSubmit}>
+      <form className={s.searchForm} onClick={handleSubmit}>
         <input
           onInput={handleInputChange}
           className={s.SearchFormInput}
