@@ -4,7 +4,8 @@ import Navigation from './Navigation/Navigation';
 
 import HomePage from '../pages/HomePage';
 import MoviesPage from '../pages/MoviesPage';
-import NotFoundView from '../pages/NotFoundView';
+// import NotFoundView from '../pages/NotFoundView';
+import MovieDetailsPage from '../pages/MovieDetailsPage';
 
 export default function App() {
   return (
@@ -18,10 +19,13 @@ export default function App() {
         <Route exact path="/movies">
           <MoviesPage />
         </Route>
-
-        <Route>
-          <NotFoundView />
+        <Route path="/movies/:movieId">
+          <MovieDetailsPage />
         </Route>
+
+        {/* <Route>
+          <NotFoundView />
+        </Route> */}
       </Switch>
     </>
   );
