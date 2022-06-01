@@ -11,3 +11,9 @@ async function fetchWithErrorHandling(url = '', config = {}) {
 export function fetchTrendMovies() {
   return fetchWithErrorHandling(`${BASE_URL}/trending/all/day?api_key=${KEY}`);
 }
+
+export function fetchMovieById(id) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/movie/${id}?api_key=${KEY}&language=en-US`
+  );
+}
