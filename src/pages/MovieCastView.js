@@ -30,4 +30,3 @@ export default function MovieCastView({ movieId }) {
     </ul>
   );
 }
-//https://previews.123rf.com/images/infadel/infadel1712/infadel171200119/91684826-a-black-linear-photo-camera-logo-like-no-image-available-.jpg
