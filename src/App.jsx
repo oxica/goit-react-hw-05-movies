@@ -36,7 +36,7 @@ export default function App() {
           </Route>
 
           <Route>
-            <NotFoundView />
+            <NotFoundView path="*" />
           </Route>
         </Switch>
       </Suspense>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchMovieCast, IMAGE_URL } from '../services/movies-api';
+import PropTypes from 'prop-types';
 
 export default function MovieCastView({ movieId }) {
   const [cast, setCast] = useState([]);
@@ -30,3 +31,7 @@ export default function MovieCastView({ movieId }) {
     </ul>
   );
 }
+
+MovieCastView.propTypes = {
+  movieId: PropTypes.number.isRequired,
+};

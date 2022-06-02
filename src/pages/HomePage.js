@@ -23,7 +23,7 @@ export default function HomePage() {
                   state: { from: location },
                 }}
               >
-                {movie.title || movie.name}
+                {movie.title}
               </Link>
             </li>
           </ul>

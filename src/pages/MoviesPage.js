@@ -1,5 +1,3 @@
-// import { useState, useEffect } from 'react';
-// import { toast } from 'react-toastify';
 import SearchBar from '../components/Searchbar/Searchbar';
 
 import { useState, useEffect } from 'react';
@@ -10,6 +8,8 @@ import { Link } from 'react-router-dom';
 const MoviesPage = () => {
   const [movies, setMovies] = useState(null);
   const [query, setQuery] = useState('');
+
+  console.log();
 
   useEffect(() => {
     if (!query) {
