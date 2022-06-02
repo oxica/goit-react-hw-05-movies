@@ -22,7 +22,7 @@ export default function MovieReview({ movieId }) {
           </ul>
         </>
       ) : (
-        <p>No Reviews</p>
+        <p>We don't have any reviews for this movie</p>
       )}
     </div>
   );

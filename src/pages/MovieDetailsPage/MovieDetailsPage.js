@@ -52,7 +52,7 @@ export default function MovieDetailsPage() {
 
             <div>
               <h2>{movie.title}</h2>
-              <p>User Score: {`${movie.vote_average}`}</p>
+              <p>User Score: {`${movie.vote_average * 10}`}%</p>
               <h3>Overview</h3>
               <p>{`${movie.overview}`}</p>
               <h3>Genres</h3>
