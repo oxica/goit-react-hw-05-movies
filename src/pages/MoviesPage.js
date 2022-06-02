@@ -1,4 +1,4 @@
-import SearchBar from '../components/Searchbar/Searchbar';
+import s from '../components/Searchbar/Searchbar.module.css';
 
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
@@ -6,32 +6,63 @@ import { fetchMovieSearch } from '../services/movies-api';
 import { Link } from 'react-router-dom';
 
 const MoviesPage = () => {
-  const [movies, setMovies] = useState(null);
-  const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [movieToFind, setMovieToFind] = useState('');
 
-  console.log();
+  // const location = useLocation();
+  // const history = useHistory();
 
   useEffect(() => {
-    if (!query) {
+    if (!movieToFind) {
       return;
     }
 
-    fetchMovieSearch(query).then(request => {
+    fetchMovieSearch(movieToFind).then(request => {
       if (!request.results.length) {
         toast.error('Try again');
         return;
       }
       setMovies(request.results);
     });
-  }, [query]);
+  }, [movieToFind]);
+
+  const handleInputChange = e => {
+    setMovieToFind(e.target.value.toLowerCase());
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    if (movieToFind.trim() === '') {
+      toast.error('Enter your search query');
+      return;
+    }
+
+    onClick(movieToFind);
+  };
 
   const onClick = request => {
-    setQuery(request);
+    setMovieToFind(request);
   };
 
   return (
     <>
-      <SearchBar onClick={onClick} />
+      <header className={s.searchbar}>
+        <form className={s.searchForm} onClick={handleSubmit}>
+          <input
+            onInput={handleInputChange}
+            className={s.SearchFormInput}
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search movie"
+            value={movieToFind}
+          />
+          <button type="submit" className={s.searchFormButton}>
+            search
+          </button>
+        </form>
+      </header>
       {movies &&
         movies.map(movie => (
           <ul>
