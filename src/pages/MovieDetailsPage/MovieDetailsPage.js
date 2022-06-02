@@ -19,7 +19,6 @@ const MovieCastView = lazy(() =>
   import('../MovieCastView' /* webpackChunkName:"MovieCastView" */)
 );
 
-
 export default function MovieDetailsPage() {
   const history = useHistory();
   const location = useLocation();
@@ -37,7 +36,9 @@ export default function MovieDetailsPage() {
 
   return (
     <>
-      {movie && (
+      {!movie ? (
+        <div className={s.notFound}>This movie is not found</div>
+      ) : (
         <>
           <button type="button" onClick={onGoBack}>
             Go back
