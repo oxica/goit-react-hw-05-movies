@@ -1,3 +1,7 @@
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+
 const KEY = '1c946dce2b60cb636de6f72a25cb04da';
 const BASE_URL = 'https://api.themoviedb.org/3';
 export const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
@@ -36,3 +40,11 @@ export function fetchMovieSearch(name) {
     `${BASE_URL}/search/movie?api_key=${KEY}&query=${name}&language=en-US&page=1&include_adult=false`
   );
 }
+
+export const searchMovies = async stringToSearch => {
+  const queryString = `search/movie?api_key=${KEY}&language=en-US&page=1&include_adult=false&query=${stringToSearch}`;
+
+  const { data: movies } = await axios.get(queryString);
+
+  return movies;
+};
