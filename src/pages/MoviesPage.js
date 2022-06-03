@@ -34,17 +34,18 @@ const MoviesPage = () => {
       const { results } = await searchMovies(movieToFind);
 
       setMovies(results);
-
-      history.push({
-        ...location,
-        search: `query=${movieToFind}`,
-      });
+      setMovieToFind('');
 
       if (results.length === 0) {
         Notiflix.Notify.warning(
           'No movies found! Please change your request and try again'
         );
       }
+
+      history.push({
+        ...location,
+        search: `query=${movieToFind}`,
+      });
     }
   };
 
