@@ -4,12 +4,12 @@ import {
   useParams,
   NavLink,
   useRouteMatch,
-  Switch,
-  Route,
   useLocation,
   useHistory,
+  Switch,
+  Route,
 } from 'react-router-dom';
-import { fetchMovieById, IMAGE_URL } from '../../services/movies-api';
+import { getMovieDetails, IMAGE_URL } from '../../services/movies-api';
 import s from './MovieDetailsPage.module.css';
 
 const MovieReview = lazy(() =>
@@ -20,18 +20,24 @@ const MovieCastView = lazy(() =>
 );
 
 export default function MovieDetailsPage() {
+  const [movie, setMovie] = useState(null);
+  const { movieId } = useParams();
   const history = useHistory();
   const location = useLocation();
-  const { movieId } = useParams();
-  const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
 
   useEffect(() => {
-    fetchMovieById(movieId).then(movie => setMovie(movie));
+    const getMovie = async () => {
+      const currentMovie = await getMovieDetails(movieId);
+
+      setMovie(currentMovie);
+    };
+
+    getMovie();
   }, [movieId]);
 
   const onGoBack = () => {
-    history.push(location?.state?.from.location ?? '/movies');
+    history.push(location?.state?.from?.location ?? '/movies');
   };
 
   return (
@@ -72,14 +78,14 @@ export default function MovieDetailsPage() {
       <p>Additional information</p>
       <nav>
         <NavLink
-          to={`${url}/cast`}
+          to={{ pathname: `${url}/cast`, state: location.state }}
           className={s.link}
           activeClassName={s.active}
         >
           Cast
         </NavLink>
         <NavLink
-          to={`${url}/reviews`}
+          to={{ pathname: `${url}/reviews`, state: location.state }}
           className={s.link}
           activeClassName={s.active}
         >

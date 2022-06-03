@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { searchMovies } from '../services/movies-api';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import Notiflix from 'notiflix';
-import { makeSlug } from '../services/slug';
 
 const MoviesPage = () => {
   const [movieToFind, setMovieToFind] = useState('');
@@ -21,7 +20,7 @@ const MoviesPage = () => {
         const { results } = await searchMovies(searchString);
 
         setMovies(results);
-        setMovieToFind('');
+        setMovieToFind(results);
       };
 
       getMovies();
@@ -35,18 +34,17 @@ const MoviesPage = () => {
       const { results } = await searchMovies(movieToFind);
 
       setMovies(results);
-      setMovieToFind('');
+
+      history.push({
+        ...location,
+        search: `query=${movieToFind}`,
+      });
 
       if (results.length === 0) {
         Notiflix.Notify.warning(
           'No movies found! Please change your request and try again'
         );
       }
-
-      history.push({
-        ...location,
-        search: `query=${movieToFind}`,
-      });
     }
   };
 
@@ -74,11 +72,10 @@ const MoviesPage = () => {
             <li key={id}>
               <Link
                 to={{
-                  pathname: `/movies/${makeSlug(`${title} ${id}`)}`,
+                  pathname: `/movies/${`${id}`}`,
                   state: {
                     from: {
                       location,
-                      label: 'Back to Movies',
                     },
                   },
                 }}
@@ -91,7 +88,7 @@ const MoviesPage = () => {
                   }
                   alt={title}
                 /> */}
-                <p className={s.moviesList__movieTitle}>{title}</p>
+                <p>{title}</p>
               </Link>
             </li>
           </ul>
