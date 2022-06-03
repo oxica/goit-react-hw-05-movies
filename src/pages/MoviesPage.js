@@ -20,7 +20,7 @@ const MoviesPage = () => {
         const { results } = await searchMovies(searchString);
 
         setMovies(results);
-        setMovieToFind(results);
+        setMovieToFind('');
       };
 
       getMovies();

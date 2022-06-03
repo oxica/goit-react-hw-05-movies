@@ -45,7 +45,6 @@ export const searchMovies = async stringToSearch => {
   const queryString = `search/movie?api_key=${KEY}&language=en-US&page=1&include_adult=false&query=${stringToSearch}`;
 
   const { data: movies } = await axios.get(queryString);
-  console.log(movies);
 
   return movies;
 };
