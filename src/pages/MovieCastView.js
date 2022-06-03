@@ -1,31 +1,36 @@
 import { useState, useEffect } from 'react';
-import { fetchMovieCast, IMAGE_URL } from '../services/movies-api';
+import { getMovieCast, IMAGE_URL } from '../services/movies-api';
 import PropTypes from 'prop-types';
 
 export default function MovieCastView({ movieId }) {
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    fetchMovieCast(movieId).then(request => setCast(request.cast));
+    const getCast = async () => {
+      const { cast } = await getMovieCast(movieId);
+      setCast(cast);
+    };
+
+    getCast();
   }, [movieId]);
 
   return (
     <ul>
       {cast &&
-        cast.map(element => (
-          <li key={element.id}>
+        cast.map(({ id, profile_path, name, character }) => (
+          <li key={id}>
             <img
               src={
-                element.profile_path
-                  ? IMAGE_URL + element.profile_path
+                profile_path
+                  ? IMAGE_URL + profile_path
                   : `https://bitsofco.de/content/images/2018/12/broken-1.png`
               }
-              alt={element.name}
+              alt={name}
               width="100"
               height=""
             />
-            <p>{element.name}</p>
-            <p>Character: {element.character}</p>
+            <p>{name}</p>
+            <p>Character: {character}</p>
           </li>
         ))}
     </ul>

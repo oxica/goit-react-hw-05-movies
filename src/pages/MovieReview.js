@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
-import { fetchMovieReviews } from '../services/movies-api';
+import { getReviews } from '../services/movies-api';
 import PropTypes from 'prop-types';
 
 export default function MovieReview({ movieId }) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetchMovieReviews(movieId).then(request => setReviews(request.results));
+    const getCast = async () => {
+      const { results } = await getReviews(movieId);
+      setReviews(results);
+    };
+    getCast();
   }, [movieId]);
 
   return (
@@ -14,10 +18,10 @@ export default function MovieReview({ movieId }) {
       {reviews.length > 0 ? (
         <>
           <ul>
-            {reviews.map((element, index) => (
-              <li key={index}>
-                <p>{element.author}</p>
-                <p>{element.content}</p>
+            {reviews.map(({ id, author, content }) => (
+              <li key={id}>
+                <p>{author}</p>
+                <p>{content}</p>
               </li>
             ))}
           </ul>
