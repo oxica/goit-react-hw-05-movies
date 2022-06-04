@@ -1,4 +1,4 @@
-import s from '../components/Searchbar/Searchbar.module.css';
+import s from './MoviesPage.module.css';
 
 import { useState, useEffect } from 'react';
 import { searchMovies } from '../services/movies-api';
@@ -20,7 +20,9 @@ const MoviesPage = () => {
         const { results } = await searchMovies(searchString);
 
         setMovies(results);
-        setMovieToFind('');
+        setMovieToFind(searchString);
+
+        console.log(searchString);
       };
 
       getMovies();
